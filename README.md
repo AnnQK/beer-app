@@ -1,4 +1,9 @@
 # Front Test Work
+:clipboard: Требования:
+- загрузка с использованием api
+- pagination
+- router
+- scss
 ## [DEMO](https://annqk.github.io/beer-app/)
 ``` bash
 npm i
