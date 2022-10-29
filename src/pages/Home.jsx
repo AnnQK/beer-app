@@ -1,18 +1,23 @@
 import React from "react";
 import { useQuery } from "react-query";
+import { fetchAllProducts, fetchWithSearch } from "../api/api";
 import ProductsList from "../components/ProductsList";
 import Input from "../components/ui/Input";
 import LoadingProducts from "../components/ui/LoadingProducts";
 import LoadMoreBtn from "../components/ui/LoadMoreBtn";
 
 function Home() {
-    const [currentPage, setCurrentPage] = React.useState(1);
-    const fetchProducts = async () => {
-        const res = await fetch(`https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=6`);
-        return res.json();
-    };
+    const [perPage, setPerPage] = React.useState(6);
 
-    const { data, isLoading, isSuccess, isError } = useQuery("products", fetchProducts);
+    const { data, isLoading, isSuccess, isError } = useQuery(
+        ["products", perPage],
+        () => fetchAllProducts(perPage),
+        { keepPreviousData: true },
+    );
+
+    const showMoreHandler = () => {
+        setPerPage((prev) => prev + 6);
+    };
 
     return (
         <div>
@@ -22,7 +27,7 @@ function Home() {
             {isSuccess && (
                 <>
                     <ProductsList isLoading={isLoading} items={data} />
-                    <LoadMoreBtn />
+                    <LoadMoreBtn clickHandler={showMoreHandler} />
                 </>
             )}
         </div>
