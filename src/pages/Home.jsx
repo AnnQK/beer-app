@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { fetchProducts, fetchWithSearch } from "../api/api";
+import { fetchProducts } from "../api/api";
 import ProductsList from "../components/ProductsList";
 import Input from "../components/ui/Input";
 import LoadingProducts from "../components/ui/LoadingProducts";

@@ -1,6 +1,4 @@
 import React from "react";
-import { useQuery } from "react-query";
-import { fetchWithSearch } from "../../../api/api";
 import styles from "./Input.module.scss";
 
 function Input({ changeSearchHandler }) {
@@ -13,7 +11,7 @@ function Input({ changeSearchHandler }) {
         return () => {
             clearTimeout(handler);
         };
-    }, [inputValue]);
+    }, [inputValue, changeSearchHandler]);
 
     const changeHandler = (e) => {
         setInputValue(e.target.value);
